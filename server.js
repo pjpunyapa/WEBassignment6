@@ -152,3 +152,110 @@ app.get("/student/:studentNum", (req, res) => {
       }
   });
 });
+
+app.get('/course/:id', function(req, res) {
+  // Get the course ID from the request parameters
+  var courseId = req.params.id;
+  
+  // Call the getCourseById function to retrieve the course data
+  cd.getCourseById(courseId)
+    .then(function(course) {
+      // If the course data is undefined, send a 404 error
+      if (course === undefined) {
+        res.status(404).send("Course Not Found");
+      }
+      else {
+        res.render("course", { course: course });
+      }
+    })
+    .catch(function(error) {
+      // If there was an error, render the error view with the error message
+      res.render('course', { message: error.message });
+    });
+});
+
+app.post("/student/update", (req, res) => {
+  cd.updateStudent(req.body)
+    .then(() => {
+      res.redirect("/students");
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error updating student");
+    });
+});
+app.get('/courses/add', (req, res) => {
+  // Render the "addCourse" view
+  res.render('addCourse');
+});
+
+app.post('/courses/add', async (req, res) => {
+  try {
+    // Call the addCourse function with the POST data
+    cd.addCourse(req.body);
+
+    // Redirect to "/courses" when the promise has resolved
+    res.redirect('/courses');
+  } catch (error) {
+    // Handle any errors that occur
+    console.error(error);
+    res.status(500).send('An error occurred while adding the course.');
+  }
+});
+
+app.post('/course/update', async (req, res) => {
+  try {
+    // Call the updateCourse function with the POST data
+    cd.updateCourse(req.body);
+
+    // Redirect to "/courses" when the promise has resolved
+    res.redirect('/courses');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred while updating the course.');
+  }
+});
+
+app.get('/course/delete/:id', function(req, res) {
+  var courseId = req.params.id;
+  
+  cd.deleteCourseById(courseId)
+    .then(function() {
+      res.redirect('/courses');
+    })
+    .catch(function(error) {
+      res.status(500).send("Unable to Remove Course / Course not found");
+    });
+});
+
+app.get('/student/delete/:studentNum', (req, res) => {
+  const studentNum = req.params.studentNum;
+  cd.deleteStudentByNum(studentNum)
+    .then(() => {
+      res.redirect('/students');
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Unable to Remove Student / Student not found');
+    });
+});
+
+
+app.get("/students/add", function(req, res) {
+  cd.getCOurses()
+    .then(function(data) {
+      res.render("addStudent", {courses: data});
+    })
+    .catch(function(err) {
+      console.log(err);
+      res.render("addStudent", {courses: []});
+    });
+});
+
+app.get('*', function(req, res){
+    res.status(404).send('PAGE NOT FOUND!!!!');
+  });
+// setup http server to listen on HTTP_PORT
+app.listen(HTTP_PORT, ()=>{console.log("server listening on port: " + HTTP_PORT)
+cd.initialize()
+});
