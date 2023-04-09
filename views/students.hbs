@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-md-12">
+    {{#unless students}}
+    <strong>{{ message }}</strong>
+    {{/unless}}
+    <br />
+    <h2>Students</h2>
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <th>Student Num</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Course ID</th>
+            </tr>
+            {{#each students}}
+            <tr>
+                <td>{{ studentNum }}</td>
+                <td><a href="/students/{{ studentNum }}">{{ firstName }} {{ lastName }}</a></td>
+                <td><a href="mailto:{{ email }}">{{ email }}</a></td>
+                <td>{{ addressStreet }} {{ addressCity }}</td>
+                <td>{{ status }}</td>
+                <td><a href="/students?course={{ course }}">{{ course }}</a></td>
+            </tr>
+        {{/each}}
+        </table>
+    </div>
+  </div>
+</div>
+

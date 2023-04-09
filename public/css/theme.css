@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Dancing+Script&display=swap');
+body {
+     margin: 0;
+     background: -webkit-linear-gradient(45deg, #7b5322, #8a69c0);
+     background: linear-gradient(45deg,  #7b5322, #8a69c0);
+     font-family: 'Cookies';
+     font-weight: 100;
+     background-attachment: fixed;
+}
+/*background color*/
+.bg-light{
+     font-family: 'Dancing Script';
+     background-color: #7b5322 !important;
+     box-shadow: 0 10px 10px -4px rgb(247, 240, 240);
+}
+/*navigation bar component*/
+.navbar-light .navbar-brand{
+     color: rgb(176, 241, 241);
+     font-size: 50px;
+     font-weight: italic;
+}
+
+.navbar-light .navbar-nav .nav-link {
+     color: rgb(156, 247, 247);
+     font-size: 30px;
+}
+/*continer component*/
+.container .row h1{
+     font-family: 'Inter';
+     font-weight: italic;
+     font-size: 45px;
+}
+
+/*Margin/alignment*/
+p {
+        margin-bottom: 1rem;
+        text-align: center;
+        font-size: 30px;
+}
+
+/*table component*/
+
+.table {
+     border-collapse: collapse;
+     overflow: hidden;
+     box-shadow: 0 0 25px rgba(10, 9, 9, 0.1);
+}
+.table caption{
+  color: black;
+}
+.table th,.table td {
+  padding: 15px;
+  background-color: rgba(9, 1, 1, 0.11);
+  color: #fff;
+}
+.table th {
+  text-align: left;
+}
+.table thead th {
+  background-color: #7b2263;
+}
+.table tbody tr:hover {
+  background-color: rgba(11, 2, 2, 0.3);
+}
+.table tbody td {
+  position: static;
+}
+.table tbody td:hover:before {
+  content: "";
+  position: static;
+  left: 0;
+  right: 0;
+  top: -9999px;
+  bottom: -9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+}
